@@ -5,7 +5,7 @@ struct RootView: View {
         TabView {
             LearnView()
                 .tabItem { Label("Learn", systemImage: "graduationcap") }
-            PlaceholderView(title: "Practice", phase: "P5")
+            PracticeView()
                 .tabItem { Label("Practice", systemImage: "ear") }
             PlaceholderView(title: "Text", phase: "P6")
                 .tabItem { Label("Text", systemImage: "doc.text") }

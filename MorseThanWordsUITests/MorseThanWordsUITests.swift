@@ -54,7 +54,7 @@ final class LearnUITests: XCTestCase {
         for tab in ["Learn", "Practice", "Text", "Settings"] {
             XCTAssertTrue(app.buttons[tab].firstMatch.exists, "\(tab) tab missing")
         }
-        app.buttons["Practice"].firstMatch.tap()
+        app.buttons["Text"].firstMatch.tap()
         XCTAssertTrue(app.staticTexts["Coming soon"].waitForExistence(timeout: 2))
     }
 }

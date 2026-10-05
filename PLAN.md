@@ -1,6 +1,6 @@
 # Morse Than Words — Implementation & Verification Plan
 
-Status: **P4 done** (Settings screen with persistence and preview). Requirements source: `CLAUDE.md`.
+Status: **P5 done** (receiving practice, reveal, local history). Requirements source: `CLAUDE.md`.
 
 ## 0. Decisions made in the planning session
 
