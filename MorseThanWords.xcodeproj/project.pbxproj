@@ -1,0 +1,572 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9D991FE97B07968E76FA186A /* MorseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 809E95DBCAC3948EE2A00290 /* MorseKit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A00FD4E2944D4D7430C7ED8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4667F8CFC9CD26AC64E16446 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A42E9BF3A7FC80DD2B70F629;
+			remoteInfo = MorseThanWords;
+		};
+		CF9F44C0EA50ECD0D7855DEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4667F8CFC9CD26AC64E16446 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A42E9BF3A7FC80DD2B70F629;
+			remoteInfo = MorseThanWords;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0B71FA1628E439F064122F60 /* MorseThanWords.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MorseThanWords.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A98DE623225BB3A24AD01598 /* MorseThanWordsUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MorseThanWordsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3CB72B3634C7EA9C9A9E8A4 /* MorseKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MorseKit; path = Packages/MorseKit; sourceTree = SOURCE_ROOT; };
+		ED460F5F49255D8295AA054C /* MorseThanWordsTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MorseThanWordsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		336ED7E20F2EC351AB18C1CA /* MorseThanWordsUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = MorseThanWordsUITests;
+			sourceTree = "<group>";
+		};
+		9DC5077E98D269A42059CA80 /* MorseThanWordsTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = MorseThanWordsTests;
+			sourceTree = "<group>";
+		};
+		C16A6F78570C867BF764FC0C /* MorseThanWords */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = MorseThanWords;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7F443DDB6F28D5D4D6788DB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D991FE97B07968E76FA186A /* MorseKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0C0D2835EB7B50D9EF4F04D5 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				C3CB72B3634C7EA9C9A9E8A4 /* MorseKit */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		2230AE013F4D0B69739D4EC4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0B71FA1628E439F064122F60 /* MorseThanWords.app */,
+				ED460F5F49255D8295AA054C /* MorseThanWordsTests.xctest */,
+				A98DE623225BB3A24AD01598 /* MorseThanWordsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A593ABD9F3E6566EBE0610F0 = {
+			isa = PBXGroup;
+			children = (
+				C16A6F78570C867BF764FC0C /* MorseThanWords */,
+				9DC5077E98D269A42059CA80 /* MorseThanWordsTests */,
+				336ED7E20F2EC351AB18C1CA /* MorseThanWordsUITests */,
+				0C0D2835EB7B50D9EF4F04D5 /* Packages */,
+				2230AE013F4D0B69739D4EC4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		75B1EB73C2831BF6D964A07F /* MorseThanWordsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 487708015DF81A3B6C376C44 /* Build configuration list for PBXNativeTarget "MorseThanWordsUITests" */;
+			buildPhases = (
+				150C72FB086B3E602E347781 /* Sources */,
+				3D7B68A1EBD418025EE784B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1ACD9FD380E4A227B23B2CF8 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				336ED7E20F2EC351AB18C1CA /* MorseThanWordsUITests */,
+			);
+			name = MorseThanWordsUITests;
+			packageProductDependencies = (
+			);
+			productName = MorseThanWordsUITests;
+			productReference = A98DE623225BB3A24AD01598 /* MorseThanWordsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		A42E9BF3A7FC80DD2B70F629 /* MorseThanWords */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDAF07541C160AA4A7DE7503 /* Build configuration list for PBXNativeTarget "MorseThanWords" */;
+			buildPhases = (
+				6E4F5221F6E078958CD3F4E2 /* Sources */,
+				23F2FF28691CD6E0730B215E /* Resources */,
+				7F443DDB6F28D5D4D6788DB3 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C16A6F78570C867BF764FC0C /* MorseThanWords */,
+			);
+			name = MorseThanWords;
+			packageProductDependencies = (
+				809E95DBCAC3948EE2A00290 /* MorseKit */,
+			);
+			productName = MorseThanWords;
+			productReference = 0B71FA1628E439F064122F60 /* MorseThanWords.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BFE699CADE3EEDC202AFABCF /* MorseThanWordsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD5C4613323596136E4B1C02 /* Build configuration list for PBXNativeTarget "MorseThanWordsTests" */;
+			buildPhases = (
+				986BB804CC75322489D13816 /* Sources */,
+				CDCABF7C47C03BDDBE885395 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A82E469323164A7B428CD620 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9DC5077E98D269A42059CA80 /* MorseThanWordsTests */,
+			);
+			name = MorseThanWordsTests;
+			packageProductDependencies = (
+			);
+			productName = MorseThanWordsTests;
+			productReference = ED460F5F49255D8295AA054C /* MorseThanWordsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4667F8CFC9CD26AC64E16446 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					75B1EB73C2831BF6D964A07F = {
+						TestTargetID = A42E9BF3A7FC80DD2B70F629;
+					};
+					A42E9BF3A7FC80DD2B70F629 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 5B2C03C1D74F0B4478BE7F41 /* Build configuration list for PBXProject "MorseThanWords" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = A593ABD9F3E6566EBE0610F0;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C380454C12B2DDCE2D430BB3 /* XCLocalSwiftPackageReference "Packages/MorseKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 2230AE013F4D0B69739D4EC4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A42E9BF3A7FC80DD2B70F629 /* MorseThanWords */,
+				BFE699CADE3EEDC202AFABCF /* MorseThanWordsTests */,
+				75B1EB73C2831BF6D964A07F /* MorseThanWordsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		23F2FF28691CD6E0730B215E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D7B68A1EBD418025EE784B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDCABF7C47C03BDDBE885395 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		150C72FB086B3E602E347781 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E4F5221F6E078958CD3F4E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		986BB804CC75322489D13816 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1ACD9FD380E4A227B23B2CF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A42E9BF3A7FC80DD2B70F629 /* MorseThanWords */;
+			targetProxy = A00FD4E2944D4D7430C7ED8D /* PBXContainerItemProxy */;
+		};
+		A82E469323164A7B428CD620 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A42E9BF3A7FC80DD2B70F629 /* MorseThanWords */;
+			targetProxy = CF9F44C0EA50ECD0D7855DEA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0DD5D4A9AAA617464A537DB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.norberttak.morsethanwords.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MorseThanWords.app/MorseThanWords";
+			};
+			name = Debug;
+		};
+		1761BF32B13A1A04B3B5E5CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Config/MorseThanWords-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.norberttak.morsethanwords;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		28AD006726F6E58F4A2038F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2B2C20E29377F314E5D222CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Config/MorseThanWords-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.norberttak.morsethanwords;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5EB155E652190780CE9D65B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A56711F42C14EED6BA87FFDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.norberttak.morsethanwords.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MorseThanWords;
+			};
+			name = Debug;
+		};
+		AFAD82595AF1F601E147D673 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.norberttak.morsethanwords.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MorseThanWords;
+			};
+			name = Release;
+		};
+		C66AF2961FD2C83054EED85D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.norberttak.morsethanwords.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MorseThanWords.app/MorseThanWords";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		487708015DF81A3B6C376C44 /* Build configuration list for PBXNativeTarget "MorseThanWordsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A56711F42C14EED6BA87FFDE /* Debug */,
+				AFAD82595AF1F601E147D673 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5B2C03C1D74F0B4478BE7F41 /* Build configuration list for PBXProject "MorseThanWords" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28AD006726F6E58F4A2038F3 /* Debug */,
+				5EB155E652190780CE9D65B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DD5C4613323596136E4B1C02 /* Build configuration list for PBXNativeTarget "MorseThanWordsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DD5D4A9AAA617464A537DB3 /* Debug */,
+				C66AF2961FD2C83054EED85D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EDAF07541C160AA4A7DE7503 /* Build configuration list for PBXNativeTarget "MorseThanWords" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1761BF32B13A1A04B3B5E5CE /* Debug */,
+				2B2C20E29377F314E5D222CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		C380454C12B2DDCE2D430BB3 /* XCLocalSwiftPackageReference "Packages/MorseKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/MorseKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		809E95DBCAC3948EE2A00290 /* MorseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MorseKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 4667F8CFC9CD26AC64E16446 /* Project object */;
+}
