@@ -9,7 +9,7 @@ struct RootView: View {
                 .tabItem { Label("Practice", systemImage: "ear") }
             PlaceholderView(title: "Text", phase: "P6")
                 .tabItem { Label("Text", systemImage: "doc.text") }
-            PlaceholderView(title: "Settings", phase: "P4")
+            SettingsView()
                 .tabItem { Label("Settings", systemImage: "gearshape") }
         }
     }

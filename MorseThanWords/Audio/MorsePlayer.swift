@@ -57,6 +57,8 @@ final class MorsePlayer {
         }
         var settings = settings
         if isMuted { settings.volume = 0 }
+        // Fresh noise and static each time; determinism is only needed in MorseKit tests.
+        settings.seed = UInt64.random(in: .min ... .max)
         let schedule = MorseSchedule(tokens: tokens, timing: timing, sampleRate: sampleRate)
         renderer.load(MorseSynth(schedule: schedule, settings: settings))
         self.onFinish = onFinish

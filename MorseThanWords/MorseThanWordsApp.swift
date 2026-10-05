@@ -2,7 +2,7 @@ import SwiftUI
 
 @main
 struct MorseThanWordsApp: App {
-    @State private var settings = AppSettings()
+    @State private var settings = AppSettings(defaults: AppEnvironment.makeSettingsDefaults())
     @State private var player = MorsePlayer(isMuted: AppEnvironment.isUITesting)
     @Environment(\.scenePhase) private var scenePhase
 

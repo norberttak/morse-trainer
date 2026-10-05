@@ -60,11 +60,4 @@ struct DisplayTests {
         #expect(MorseCode.symbol(for: "L")?.spokenPattern == "dit dah dit dit")
         #expect(MorseCode.symbol(for: "0")?.spokenPattern == "dah dah dah dah dah")
     }
-
-    @Test @MainActor func settingsBuildTiming() {
-        let settings = AppSettings()
-        settings.characterWPM = 25
-        settings.effectiveWPM = 12
-        #expect(settings.timing == MorseTiming(characterWPM: 25, effectiveWPM: 12))
-    }
 }

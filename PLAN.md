@@ -1,6 +1,6 @@
 # Morse Than Words — Implementation & Verification Plan
 
-Status: **P3 done** (audio engine + Learn screen); manual listening check pending. Requirements source: `CLAUDE.md`.
+Status: **P4 done** (Settings screen with persistence and preview). Requirements source: `CLAUDE.md`.
 
 ## 0. Decisions made in the planning session
 
