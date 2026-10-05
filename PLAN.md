@@ -1,6 +1,6 @@
 # Morse Than Words — Implementation & Verification Plan
 
-Status: **P1 done** (MorseKit core: code table, normalizer, timing). Requirements source: `CLAUDE.md`.
+Status: **P2 done** (synth: tone, envelope, HF impairments, round-trip verified). Requirements source: `CLAUDE.md`.
 
 ## 0. Decisions made in the planning session
 
