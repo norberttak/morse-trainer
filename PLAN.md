@@ -1,6 +1,6 @@
 # Morse Than Words — Implementation & Verification Plan
 
-Status: **P2 done** (synth: tone, envelope, HF impairments, round-trip verified). Requirements source: `CLAUDE.md`.
+Status: **P3 done** (audio engine + Learn screen); manual listening check pending. Requirements source: `CLAUDE.md`.
 
 ## 0. Decisions made in the planning session
 
@@ -64,7 +64,8 @@ simulator needed. The app target is thin UI + `AVAudioEngine` glue.
   5. Distortion — soft clipping (tanh) drive
   6. Optional frequency drift/chirp (few Hz) — stretch goal
 - `AVAudioSession` category `.playback` so it is audible with the ring/silent switch on;
-  pause on `scenePhase != .active` and on interruptions (phone call, Siri).
+  stop on `scenePhase == .background` (not `.inactive`, which also fires for Control Center)
+  and on interruptions (phone call, Siri); pause when headphones are unplugged.
 
 ### 1.3 Persistence
 - Settings: `@AppStorage` / UserDefaults (speed, Farnsworth, tone, envelope, impairments,
@@ -145,7 +146,7 @@ Each phase ends with its tests green and a short demo on simulator (iPhone 17 + 
   noise (e.g. SNR +10 dB). This single test verifies the whole pipeline end to end.
 
 ### 3.3 UI tests — XCUITest (iPhone 17 & iPad Air 11" simulators)
-- Learn: tap `L` → label shows `.-..`; all sections reachable.
+- Learn: tap `L` → shows `L` and pattern (accessibility label "dit dah dit dit"); all sections reachable.
 - Settings: change WPM to 25, relaunch → still 25; effective WPM can't exceed char WPM.
 - Practice: set chars `KMR`, count 10, group 5 → play (test hook: 50 WPM / skip mode) →
   reveal shows 2 groups of 5, only K/M/R → appears in history → delete it.

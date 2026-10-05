@@ -1,0 +1,35 @@
+import SwiftUI
+
+struct RootView: View {
+    var body: some View {
+        TabView {
+            LearnView()
+                .tabItem { Label("Learn", systemImage: "graduationcap") }
+            PlaceholderView(title: "Practice", phase: "P5")
+                .tabItem { Label("Practice", systemImage: "ear") }
+            PlaceholderView(title: "Text", phase: "P6")
+                .tabItem { Label("Text", systemImage: "doc.text") }
+            PlaceholderView(title: "Settings", phase: "P4")
+                .tabItem { Label("Settings", systemImage: "gearshape") }
+        }
+    }
+}
+
+/// Stand-in for screens built in later phases.
+private struct PlaceholderView: View {
+    let title: LocalizedStringKey
+    let phase: String
+
+    var body: some View {
+        NavigationStack {
+            ContentUnavailableView("Coming soon", systemImage: "hammer", description: Text(verbatim: "Planned for \(phase)"))
+                .navigationTitle(title)
+        }
+    }
+}
+
+#Preview {
+    RootView()
+        .environment(AppSettings())
+        .environment(MorsePlayer())
+}
