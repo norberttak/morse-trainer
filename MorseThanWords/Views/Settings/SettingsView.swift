@@ -30,6 +30,8 @@ struct SettingsView: View {
                         .foregroundStyle(.footnoteText)
                 }
             }
+            // Prominent headers, as in Practice: the default gray header is just below 4.5:1.
+            .headerProminence(.increased)
             .navigationTitle("Settings")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {

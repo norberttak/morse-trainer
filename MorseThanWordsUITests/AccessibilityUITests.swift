@@ -28,6 +28,9 @@ final class AccessibilityUITests: XCTestCase {
     }
 
     private func audit(_ screen: String, _ types: XCUIAccessibilityAuditType = .all) {
+        // Let transitions (tab switch, keyboard dismissal, form re-layout) finish first: an audit
+        // taken mid-animation reports different, transient issues from run to run.
+        Thread.sleep(forTimeInterval: 1)
         do {
             try app.performAccessibilityAudit(for: types) { [app] issue in
                 // iOS 26 fades scroll content under the floating tab bar (scroll edge effect), so

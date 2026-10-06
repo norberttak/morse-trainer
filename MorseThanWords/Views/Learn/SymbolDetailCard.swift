@@ -36,8 +36,8 @@ struct SymbolDetailCard: View {
                             .accessibilityAddTraits(.isStaticText)
                             .accessibilityIdentifier("selectedPattern")
                         Text(symbol.pattern)
-                            .font(.title3.monospaced())
-                            .foregroundStyle(.secondary)
+                            .font(.title3.monospaced().weight(.semibold))
+                            .foregroundStyle(.footnoteText)
                             .accessibilityHidden(true)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)

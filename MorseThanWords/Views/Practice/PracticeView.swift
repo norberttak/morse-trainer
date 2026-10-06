@@ -143,15 +143,17 @@ private struct PracticeSetupForm: View {
                     .textInputAutocapitalization(.characters)
                     .autocorrectionDisabled()
                     .accessibilityIdentifier("practiceCharacters")
-                // A menu rather than a scrolling row of buttons: nothing is ever half-hidden.
-                Menu {
+                // A standard picker row: shows the matching preset, or Custom for typed sets.
+                Picker("Preset", selection: Binding(
+                    get: { Self.presets.first { $0.1 == settings.practiceCharacters }?.1 },
+                    set: { if let value = $0 { settings.practiceCharacters = value } }
+                )) {
+                    Text("Custom").tag(String?.none)
                     ForEach(Self.presets, id: \.1) { title, value in
-                        Button(title) { settings.practiceCharacters = value }
+                        Text(title).tag(String?.some(value))
                     }
-                } label: {
-                    Label("Presets", systemImage: "list.bullet")
                 }
-                .accessibilityIdentifier("presetsMenu")
+                .accessibilityIdentifier("presetPicker")
             } header: {
                 Text("Characters")
             } footer: {
@@ -164,14 +166,12 @@ private struct PracticeSetupForm: View {
             }
 
             Section {
-                Stepper(value: $settings.practiceCount, in: PracticeGenerator.countRange, step: 5) {
-                    LabeledContent("Characters in session", value: "\(settings.practiceCount)")
-                }
-                .accessibilityIdentifier("practiceCount")
-                Stepper(value: $settings.practiceGroupSize, in: PracticeGenerator.groupSizeRange) {
-                    LabeledContent("Group size", value: "\(settings.practiceGroupSize)")
-                }
-                .accessibilityIdentifier("practiceGroupSize")
+                // Plain stepper labels: a LabeledContent inside a Stepper draws its value without
+                // an accessibility element of its own and does not scale with Dynamic Type.
+                Stepper("Characters in session: \(settings.practiceCount)", value: $settings.practiceCount, in: PracticeGenerator.countRange, step: 5)
+                    .accessibilityIdentifier("practiceCount")
+                Stepper("Group size: \(settings.practiceGroupSize)", value: $settings.practiceGroupSize, in: PracticeGenerator.groupSizeRange)
+                    .accessibilityIdentifier("practiceGroupSize")
             } header: {
                 Text("Session")
             } footer: {
@@ -191,6 +191,8 @@ private struct PracticeSetupForm: View {
                 .accessibilityIdentifier("startPractice")
             }
         }
+        // Prominent (primary, bold) headers: the default gray section header is just below 4.5:1.
+        .headerProminence(.increased)
     }
 
     private static func durationText(_ seconds: Double) -> String {
