@@ -1,6 +1,6 @@
 # Morse Than Words — Implementation & Verification Plan
 
-Status: **P5 done** (receiving practice, reveal, local history). Requirements source: `CLAUDE.md`.
+Status: **P6 done** (text playback: paste/type/import, encoding detection, ticker). Requirements source: `CLAUDE.md`.
 
 ## 0. Decisions made in the planning session
 
@@ -101,7 +101,7 @@ Each phase ends with its tests green and a short demo on simulator (iPhone 17 + 
 | **P3 Audio + Learn screen** | AVAudioEngine wrapper, audio session handling, Learn UI | Manual: tone plays, no clicks; UI test opens L and sees `.-..` |
 | **P4 Settings** | Settings UI + persistence, preview playback | Settings survive relaunch (UI test) |
 | **P5 Practice** | Generator, session player, reveal, SwiftData history | §3.1 generator tests + §3.3 UI flow |
-| **P6 Text** | Paste/import, encoding detection, highlight-follow playback | Import of sample files (UTF-8, Latin-1, 1 MB) works |
+| **P6 Text** | Paste/import, encoding detection, highlight-follow playback | Import of sample files (UTF-8, Latin-1, 1 MB) works. Files > 10 MB are refused; editor keeps the first 150 000 characters; playback is capped at 100 000 characters (~16 h at 20 WPM) with a visible notice |
 | **P7 Polish** | iPad layout, Dynamic Type, VoiceOver, dark mode, app icon, launch screen | Accessibility audit (Xcode) clean |
 | **P8 App Store prep** | Privacy policy page, screenshots, metadata, TestFlight | TestFlight build installed on real iPhone + iPad |
 | **P9 (later) OCR** | Camera/photo capture → Vision handwriting recognition → alignment scoring | See §4 |

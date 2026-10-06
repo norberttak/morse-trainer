@@ -7,23 +7,10 @@ struct RootView: View {
                 .tabItem { Label("Learn", systemImage: "graduationcap") }
             PracticeView()
                 .tabItem { Label("Practice", systemImage: "ear") }
-            PlaceholderView(title: "Text", phase: "P6")
+            TextView()
                 .tabItem { Label("Text", systemImage: "doc.text") }
             SettingsView()
                 .tabItem { Label("Settings", systemImage: "gearshape") }
-        }
-    }
-}
-
-/// Stand-in for screens built in later phases.
-private struct PlaceholderView: View {
-    let title: LocalizedStringKey
-    let phase: String
-
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView("Coming soon", systemImage: "hammer", description: Text(verbatim: "Planned for \(phase)"))
-                .navigationTitle(title)
         }
     }
 }
@@ -32,4 +19,5 @@ private struct PlaceholderView: View {
     RootView()
         .environment(AppSettings())
         .environment(MorsePlayer())
+        .modelContainer(for: PracticeSession.self, inMemory: true)
 }

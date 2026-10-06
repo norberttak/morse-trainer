@@ -22,6 +22,8 @@ final class MorsePlayer {
     private(set) var currentTokenIndex: Int?
     /// 0…1 through the current playback.
     private(set) var progress = 0.0
+    /// Incremented on every `play`, so a screen can tell its playback was replaced by another.
+    private(set) var playbackID = 0
 
     /// Silences output but keeps all behavior; used by UI tests.
     @ObservationIgnored let isMuted: Bool
@@ -40,20 +42,23 @@ final class MorsePlayer {
 
     // MARK: - Transport
 
+    /// Starts playback and returns its `playbackID`.
+    @discardableResult
     func play(
         _ tokens: [MorseToken],
         timing: MorseTiming,
         settings: SynthSettings,
         onFinish: (() -> Void)? = nil
-    ) {
+    ) -> Int {
         stop()
-        guard !tokens.isEmpty else { return }
+        playbackID += 1
+        guard !tokens.isEmpty else { return playbackID }
         let sampleRate: Double
         do {
             sampleRate = try startEngineIfNeeded()
         } catch {
             logger.error("Could not start audio: \(error.localizedDescription)")
-            return
+            return playbackID
         }
         var settings = settings
         if isMuted { settings.volume = 0 }
@@ -64,6 +69,12 @@ final class MorsePlayer {
         self.onFinish = onFinish
         status = .playing
         startMonitoring()
+        return playbackID
+    }
+
+    /// True while the playback started with `id` is still playing or paused.
+    func isPlaying(_ id: Int?) -> Bool {
+        id == playbackID && status != .idle
     }
 
     func pause() {

@@ -54,7 +54,9 @@ final class LearnUITests: XCTestCase {
         for tab in ["Learn", "Practice", "Text", "Settings"] {
             XCTAssertTrue(app.buttons[tab].firstMatch.exists, "\(tab) tab missing")
         }
-        app.buttons["Text"].firstMatch.tap()
-        XCTAssertTrue(app.staticTexts["Coming soon"].waitForExistence(timeout: 2))
+        for tab in ["Practice", "Text", "Settings", "Learn"] {
+            app.buttons[tab].firstMatch.tap()
+            XCTAssertTrue(app.navigationBars[tab].waitForExistence(timeout: 2), "\(tab) screen did not open")
+        }
     }
 }

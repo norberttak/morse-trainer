@@ -38,11 +38,8 @@ struct PracticeView: View {
                 }
             }
         }
-        .onChange(of: player.status) { _, status in
-            if status == .idle {
-                controller.playbackEndedEarly()
-            }
-        }
+        .onChange(of: player.status) { controller.sync(with: player) }
+        .onChange(of: player.playbackID) { controller.sync(with: player) }
     }
 
     // MARK: - Phases

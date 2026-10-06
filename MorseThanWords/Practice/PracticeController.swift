@@ -21,6 +21,7 @@ final class PracticeController {
 
     @ObservationIgnored private var characterIndex: [Int] = []
     @ObservationIgnored private var countdownTask: Task<Void, Never>?
+    @ObservationIgnored private var playbackID: Int?
 
     /// For each token, the 0-based index of the character it belongs to (word gaps map to the
     /// preceding character), so playback progress can be shown as "12 / 50".
@@ -68,7 +69,7 @@ final class PracticeController {
             }
             guard let self else { return }
             phase = .playing
-            player.play(tokens, timing: timing, settings: synth) { [weak self] in
+            playbackID = player.play(tokens, timing: timing, settings: synth) { [weak self] in
                 guard let self else { return }
                 let session = PracticeSession(groups: groups, characters: characters, groupSize: groupSize, timing: timing)
                 result = session
@@ -78,10 +79,11 @@ final class PracticeController {
         }
     }
 
-    /// Playback stopped without completing (Stop button, another screen took the player,
-    /// interruption or background). Nothing is saved.
-    func playbackEndedEarly() {
-        guard phase == .playing else { return }
+    /// Call when the player's state changes: if our playback stopped without completing
+    /// (Stop, another screen took the player, interruption, background), go back to setup.
+    /// Nothing is saved.
+    func sync(with player: MorsePlayer) {
+        guard phase == .playing, !player.isPlaying(playbackID) else { return }
         reset()
     }
 
@@ -106,5 +108,6 @@ final class PracticeController {
         groups = []
         characterIndex = []
         result = nil
+        playbackID = nil
     }
 }
