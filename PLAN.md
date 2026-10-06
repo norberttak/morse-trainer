@@ -1,6 +1,6 @@
 # Morse Than Words — Implementation & Verification Plan
 
-Status: **P7 done** (icon, Dynamic Type, VoiceOver, contrast; accessibility audit clean on iPhone and iPad). Requirements source: `CLAUDE.md`.
+Status: **P8 prepared** (metadata, pages, screenshots, archive script, v1.0.0); TestFlight on real devices pending — see docs/app-store/RELEASE.md. Requirements source: `CLAUDE.md`.
 
 ## 0. Decisions made in the planning session
 

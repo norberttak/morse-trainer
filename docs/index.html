@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morse Than Words – Support</title>
+<style>
+  :root { color-scheme: light dark; --text: #1c1c1e; --muted: #48484a; --bg: #ffffff; --accent: #1d4ed8; --card: #f2f2f7; }
+  @media (prefers-color-scheme: dark) { :root { --text: #f2f2f7; --muted: #c7c7cc; --bg: #000000; --accent: #60a5fa; --card: #1c1c1e; } }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0 0 4px; }
+  h2 { font-size: 20px; margin: 32px 0 8px; }
+  .tagline { color: var(--muted); margin: 0 0 24px; }
+  .card { background: var(--card); border-radius: 14px; padding: 16px 20px; }
+  .muted { color: var(--muted); font-size: 15px; }
+  a { color: var(--accent); }
+  dt { font-weight: 600; margin-top: 16px; }
+  dd { margin: 4px 0 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Morse Than Words</h1>
+  <p class="tagline">Learn and practice Morse code on iPhone and iPad. Free, no ads, no data collected.</p>
+
+  <div class="card">
+    <strong>Need help or found a bug?</strong><br>
+    Open an issue on <a href="https://github.com/norberttak/morse-trainer/issues">GitHub</a>.
+    Please include your device, iOS version and what you were doing.
+  </div>
+
+  <h2>Frequently asked questions</h2>
+  <dl>
+    <dt>I can't hear anything.</dt>
+    <dd>Check the volume in Settings › Volume and your device volume. The app plays even with the
+      silent switch on. Audio stops when the app goes to the background.</dd>
+
+    <dt>What do WPM and Farnsworth mean?</dt>
+    <dd>Speed is in words per minute using the standard word "PARIS". Farnsworth spacing sends each
+      character at full speed but adds longer pauses between characters and words, which makes
+      learning by sound easier.</dd>
+
+    <dt>How do I enter prosigns?</dt>
+    <dd>Type them in angle brackets: &lt;AR&gt;, &lt;SK&gt;, &lt;BT&gt;, &lt;KN&gt; or &lt;SOS&gt;.</dd>
+
+    <dt>Which text files can I import?</dt>
+    <dd>Plain-text (.txt) files from the Files app, in UTF-8, UTF-16 or Latin-1/Windows-1252.
+      Up to 100,000 characters are sent.</dd>
+
+    <dt>Where is my practice history stored?</dt>
+    <dd>Only on your device. See the <a href="privacy.html">privacy policy</a>.</dd>
+  </dl>
+
+  <p class="muted"><a href="privacy.html">Privacy policy</a> · © 2026 Norbert Takacs</p>
+</main>
+</body>
+</html>
