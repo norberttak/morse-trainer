@@ -99,18 +99,20 @@ struct TextView: View {
                     .accessibilityIdentifier("textSummary")
             }
             if prepared.skippedCount > 0 {
-                Text("^[\(prepared.skippedCount) unsupported character](inflect: true) will be skipped: \(prepared.skippedCharacters.prefix(10).map(String.init).joined(separator: " "))")
-                    .foregroundStyle(.orange)
-                    .accessibilityIdentifier("textSkipped")
+                WarningText(
+                    Text("^[\(prepared.skippedCount) unsupported character](inflect: true) will be skipped: \(prepared.skippedCharacters.prefix(10).map(String.init).joined(separator: " "))"),
+                    identifier: "textSkipped"
+                )
             }
             if prepared.isTruncated || importWasShortened {
-                Text("The text is long: only the first \(PreparedText.defaultSymbolLimit.formatted()) characters will be sent.")
-                    .foregroundStyle(.orange)
-                    .accessibilityIdentifier("textTruncated")
+                WarningText(
+                    Text("The text is long: only the first \(PreparedText.defaultSymbolLimit.formatted()) characters will be sent."),
+                    identifier: "textTruncated"
+                )
             }
         }
         .font(.footnote)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(.footnoteText)
     }
 
     @ToolbarContentBuilder

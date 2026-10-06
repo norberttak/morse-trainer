@@ -143,26 +143,23 @@ private struct PracticeSetupForm: View {
                     .textInputAutocapitalization(.characters)
                     .autocorrectionDisabled()
                     .accessibilityIdentifier("practiceCharacters")
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach(Self.presets, id: \.1) { title, value in
-                            // Primary-colored label: accent text on the accent-tinted bordered
-                            // fill falls just short of the 4.5:1 contrast ratio.
-                            Button { settings.practiceCharacters = value } label: {
-                                Text(title).foregroundStyle(Color.primary)
-                            }
-                            .buttonStyle(.bordered)
-                        }
+                // A menu rather than a scrolling row of buttons: nothing is ever half-hidden.
+                Menu {
+                    ForEach(Self.presets, id: \.1) { title, value in
+                        Button(title) { settings.practiceCharacters = value }
                     }
+                } label: {
+                    Label("Presets", systemImage: "list.bullet")
                 }
+                .accessibilityIdentifier("presetsMenu")
             } header: {
                 Text("Characters")
             } footer: {
                 if characters.isEmpty {
-                    Text("Enter at least one letter, number or punctuation mark.")
-                        .foregroundStyle(.red)
+                    WarningText(Text("Enter at least one letter, number or punctuation mark."))
                 } else {
                     Text("^[\(characters.count) different character](inflect: true). Prosigns can be entered as <AR>, <SK>, <BT>, <KN> or <SOS>.")
+                        .foregroundStyle(.footnoteText)
                 }
             }
 
@@ -180,6 +177,7 @@ private struct PracticeSetupForm: View {
             } footer: {
                 if !characters.isEmpty {
                     Text("About \(Self.durationText(PracticeGenerator.estimatedDuration(characters: characters, count: settings.practiceCount, groupSize: settings.practiceGroupSize, timing: settings.timing))) at the speed set in Settings.")
+                        .foregroundStyle(.footnoteText)
                 }
             }
 

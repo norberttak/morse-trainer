@@ -27,7 +27,7 @@ struct SettingsView: View {
                     LabeledContent("Version", value: Self.appVersion)
                     Text("Morse Than Words collects no data. It has no accounts, no ads, no tracking and no network access. Your settings and practice history stay on this device.")
                         .font(.footnote)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.footnoteText)
                 }
             }
             .navigationTitle("Settings")
@@ -73,6 +73,7 @@ struct SettingsView: View {
             Text("Speed")
         } footer: {
             Text("Speed is in words per minute (PARIS standard). Farnsworth spacing sends each character at full speed but adds longer pauses between characters and words, which makes learning by sound easier.")
+                .foregroundStyle(.footnoteText)
         }
     }
 
@@ -156,6 +157,7 @@ struct SettingsView: View {
             Text("Radio Conditions")
         } footer: {
             Text("Simulates listening on a shortwave (HF) radio. Use Preview to hear the result.")
+                .foregroundStyle(.footnoteText)
         }
     }
 

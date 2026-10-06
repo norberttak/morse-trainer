@@ -37,6 +37,13 @@ final class AccessibilityUITests: XCTestCase {
                    element.frame.maxY > window.frame.maxY - 110 {
                     return true
                 }
+                // At launch the iPadOS floating tab bar builds its four labels without Dynamic
+                // Type and fixes them on the first tab switch (measured: exactly four such
+                // issues, gone after a tab round trip). The app itself has no UIKit labels, so a
+                // Dynamic Type issue on an unexposed UILabel is system UI.
+                if issue.auditType == .dynamicType, issue.element == nil, issue.detailedDescription.contains("UILabel") {
+                    return true
+                }
                 XCTFail("[\(screen)] \(issue.auditType): \(issue.compactDescription) | \(issue.detailedDescription) — \(issue.element?.debugDescription.prefix(200) ?? "no element")")
                 return true
             }
@@ -46,7 +53,9 @@ final class AccessibilityUITests: XCTestCase {
     }
 
     private func auditAllScreens(_ types: XCUIAccessibilityAuditType = .all, label: String) {
-        tab("Learn")
+        // Learn is the start tab; it is not tapped first, as re-tapping the selected tab in
+        // the iPadOS floating tab bar leaves a transient system UILabel on screen.
+        XCTAssertTrue(app.navigationBars["Learn"].waitForExistence(timeout: 5))
         audit("\(label) Learn empty", types)
         app.buttons["symbol-L"].tap()
         audit("\(label) Learn selected", types)
@@ -57,8 +66,21 @@ final class AccessibilityUITests: XCTestCase {
         audit("\(label) History", types)
         app.navigationBars.buttons.firstMatch.tap()
 
+        // Warning state: no usable characters.
+        let characters = app.textFields["practiceCharacters"]
+        characters.coordinate(withNormalizedOffset: CGVector(dx: 0.98, dy: 0.5)).tap()
+        characters.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 20) + "#")
+        app.navigationBars["Practice"].staticTexts["Practice"].firstMatch.tap()  // dismiss keyboard
+        audit("\(label) Practice warning", types)
+
         tab("Text")
         audit("\(label) Text editor", types)
+        let editor = app.textViews["textInput"]
+        editor.tap()
+        editor.typeText("Hi #73")
+        app.navigationBars["Text"].staticTexts["Text"].firstMatch.tap()  // dismiss keyboard
+        XCTAssertTrue(app.staticTexts["textSkipped"].waitForExistence(timeout: 3))
+        audit("\(label) Text with warning", types)
 
         tab("Settings")
         audit("\(label) Settings", types)
