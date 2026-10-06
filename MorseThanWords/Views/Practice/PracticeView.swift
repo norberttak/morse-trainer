@@ -146,8 +146,12 @@ private struct PracticeSetupForm: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(Self.presets, id: \.1) { title, value in
-                            Button(title) { settings.practiceCharacters = value }
-                                .buttonStyle(.bordered)
+                            // Primary-colored label: accent text on the accent-tinted bordered
+                            // fill falls just short of the 4.5:1 contrast ratio.
+                            Button { settings.practiceCharacters = value } label: {
+                                Text(title).foregroundStyle(Color.primary)
+                            }
+                            .buttonStyle(.bordered)
                         }
                     }
                 }
