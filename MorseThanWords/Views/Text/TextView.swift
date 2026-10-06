@@ -184,7 +184,7 @@ struct TextView: View {
     // MARK: - Helpers
 
     private var playbackTiming: MorseTiming {
-        AppEnvironment.isUITesting ? MorseTiming(characterWPM: 50) : settings.timing
+        AppEnvironment.usesFastPlayback ? MorseTiming(characterWPM: 50) : settings.timing
     }
 
     static func durationText(_ seconds: Double) -> String {

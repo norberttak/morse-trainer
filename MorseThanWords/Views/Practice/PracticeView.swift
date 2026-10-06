@@ -104,7 +104,7 @@ struct PracticeView: View {
     private func start() {
         let characters = PracticeGenerator.characterSet(from: settings.practiceCharacters)
         // UI tests: fast, no countdown, so the flow finishes in seconds.
-        let timing = AppEnvironment.isUITesting ? MorseTiming(characterWPM: 50) : settings.timing
+        let timing = AppEnvironment.usesFastPlayback ? MorseTiming(characterWPM: 50) : settings.timing
         controller.start(
             characters: characters,
             count: settings.practiceCount,
@@ -112,7 +112,7 @@ struct PracticeView: View {
             timing: timing,
             synth: settings.synth,
             player: player,
-            countdownSeconds: AppEnvironment.isUITesting ? 0 : 3
+            countdownSeconds: AppEnvironment.usesFastPlayback ? 0 : 3
         ) { session in
             modelContext.insert(session)
         }

@@ -50,13 +50,15 @@ largest text size, VoiceOver, and airplane mode.
 
 ## 6. Submit for review
 
-1. Upload the screenshots from `docs/app-store/screenshots/iPhone17ProMax/` (6.9" display)
-   and `docs/app-store/screenshots/iPadPro13inchM5/` (13" display).
+1. Upload the screenshots from `docs/app-store/screenshots/iPhone17Pro/` (iPhone 6.3" display,
+   1206 × 2622) and `docs/app-store/screenshots/iPadPro13inchM5/` (iPad 13" display), and the
+   app preview `docs/app-store/preview/app-preview-iphone.mp4` (886 × 1920) under iPhone 6.3".
 2. Select the TestFlight build on the version page, paste the review notes, and submit.
 
 ## Re-generating assets
 
-- Screenshots: `./scripts/make-screenshots.sh`
+- Screenshots: `./scripts/make-screenshots.sh` (or pass a simulator name for one device)
+- App preview: `./scripts/make-app-preview.sh`
 - App icon: `swift scripts/make-app-icon.swift`
 - Metadata limits: `./scripts/check-metadata.py`
 - Bump the build number (`CURRENT_PROJECT_VERSION` in `project.yml`) for every upload.

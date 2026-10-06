@@ -4,6 +4,10 @@ enum AppEnvironment {
     /// Set by UI tests via the `-uiTesting` launch argument: muted audio, isolated settings.
     static let isUITesting = ProcessInfo.processInfo.arguments.contains("-uiTesting")
 
+    /// UI tests run playback at 50 WPM without the countdown so they finish quickly. The app
+    /// preview recording passes `-realSpeed` to keep the normal speed and countdown.
+    static let usesFastPlayback = isUITesting && !ProcessInfo.processInfo.arguments.contains("-realSpeed")
+
     /// UI tests pass `-keepSettings` on relaunch to check that settings persisted.
     private static let keepsSettings = ProcessInfo.processInfo.arguments.contains("-keepSettings")
 
