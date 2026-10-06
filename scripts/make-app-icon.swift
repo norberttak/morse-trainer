@@ -33,7 +33,8 @@ func render(_ palette: Palette, to file: String) throws {
     let space = CGColorSpace(name: CGColorSpace.sRGB)!
     guard let context = CGContext(
         data: nil, width: size, height: size, bitsPerComponent: 8, bytesPerRow: 0,
-        space: space, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        // Opaque RGB: App Store Connect rejects an app icon with an alpha channel (ITMS-90717).
+        space: space, bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue
     ) else { fatalError("no context") }
 
     let s = CGFloat(size)
