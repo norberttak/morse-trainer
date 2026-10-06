@@ -8,6 +8,10 @@ import os
 /// The engine is started lazily on the first `play` and kept running (outputting silence)
 /// between plays so repeated taps on the Learn screen start instantly. `shutdown()` stops it
 /// when the app goes to the background.
+///
+/// With `.silent` output (UI and unit tests) the same synth is pulled by a virtual 48 kHz clock
+/// instead: identical timing and progress, but the audio hardware is never touched. Under heavy
+/// test load the simulator's audio server can stall, and AudioToolbox then aborts the app.
 @MainActor
 @Observable
 final class MorsePlayer {
@@ -25,8 +29,15 @@ final class MorsePlayer {
     /// Incremented on every `play`, so a screen can tell its playback was replaced by another.
     private(set) var playbackID = 0
 
-    /// Silences output but keeps all behavior; used by UI tests.
-    @ObservationIgnored let isMuted: Bool
+    enum Output {
+        /// The device's audio output.
+        case speaker
+        /// No audio hardware: a virtual clock consumes the samples (tests).
+        case silent
+    }
+
+    @ObservationIgnored let output: Output
+    private static let silentSampleRate = 48_000.0
 
     @ObservationIgnored private let renderer = SynthRenderer()
     @ObservationIgnored private var engine: AVAudioEngine?
@@ -35,9 +46,11 @@ final class MorsePlayer {
     @ObservationIgnored private var onFinish: (() -> Void)?
     @ObservationIgnored private let logger = Logger(subsystem: "com.norberttak.morsethanwords", category: "audio")
 
-    init(isMuted: Bool = false) {
-        self.isMuted = isMuted
-        observeSession()
+    init(output: Output = .speaker) {
+        self.output = output
+        if output == .speaker {
+            observeSession()
+        }
     }
 
     // MARK: - Transport
@@ -54,14 +67,18 @@ final class MorsePlayer {
         playbackID += 1
         guard !tokens.isEmpty else { return playbackID }
         let sampleRate: Double
-        do {
-            sampleRate = try startEngineIfNeeded()
-        } catch {
-            logger.error("Could not start audio: \(error.localizedDescription)")
-            return playbackID
+        switch output {
+        case .speaker:
+            do {
+                sampleRate = try startEngineIfNeeded()
+            } catch {
+                logger.error("Could not start audio: \(error.localizedDescription)")
+                return playbackID
+            }
+        case .silent:
+            sampleRate = Self.silentSampleRate
         }
         var settings = settings
-        if isMuted { settings.volume = 0 }
         // Fresh noise and static each time; determinism is only needed in MorseKit tests.
         settings.seed = UInt64.random(in: .min ... .max)
         let schedule = MorseSchedule(tokens: tokens, timing: timing, sampleRate: sampleRate)
@@ -103,6 +120,7 @@ final class MorsePlayer {
     /// Stops playback and releases the audio hardware (app went to the background).
     func shutdown() {
         stop()
+        guard output == .speaker else { return }
         tearDownEngine()
         do {
             try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
@@ -177,8 +195,12 @@ final class MorsePlayer {
 
     private func startMonitoring() {
         monitorTask = Task { [weak self] in
+            var clock = SilentClock(sampleRate: Self.silentSampleRate)
             while !Task.isCancelled {
                 guard let self else { return }
+                if output == .silent {
+                    clock.consume(into: renderer)
+                }
                 let snapshot = renderer.snapshot
                 currentTokenIndex = snapshot.currentTokenIndex
                 progress = snapshot.totalFrames > 0 ? Double(snapshot.framePosition) / Double(snapshot.totalFrames) : 0
@@ -234,6 +256,30 @@ final class MorsePlayer {
                 self?.stop()
                 self?.tearDownEngine()
             }
+        }
+    }
+}
+
+/// Pulls samples from the renderer in real time, as the audio hardware would, and discards them.
+private struct SilentClock {
+    let sampleRate: Double
+    private let start = ContinuousClock.now
+    private var consumed = 0
+    private var buffer = [Float](repeating: 0, count: 4_096)
+
+    init(sampleRate: Double) {
+        self.sampleRate = sampleRate
+    }
+
+    mutating func consume(into renderer: SynthRenderer) {
+        let elapsed = ContinuousClock.now - start
+        let seconds = Double(elapsed.components.seconds) + Double(elapsed.components.attoseconds) * 1e-18
+        var due = Int(seconds * sampleRate) - consumed
+        while due > 0 {
+            let count = min(due, buffer.count)
+            buffer.withUnsafeMutableBufferPointer { renderer.render(into: UnsafeMutableBufferPointer(rebasing: $0[..<count])) }
+            consumed += count
+            due -= count
         }
     }
 }

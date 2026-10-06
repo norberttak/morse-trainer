@@ -27,7 +27,14 @@ final class AccessibilityUITests: XCTestCase {
         XCTAssertTrue(app.navigationBars[name].waitForExistence(timeout: 3))
     }
 
-    private func audit(_ screen: String, _ types: XCUIAccessibilityAuditType = .all) {
+    /// - Parameter isSettings: Settings only, for its standard iOS 26 switches and sliders:
+    ///   - they produce contrast findings with no element (measured: the count follows the number
+    ///     of those controls on screen and no styling changes it; Apple's Settings app uses the
+    ///     same controls), so element-less contrast issues are accepted;
+    ///   - at XXXL, some toggle labels are reported as not scaling although their frame shows they
+    ///     did (63.5 pt tall vs 20.3 pt at the default size), so a Dynamic Type finding is accepted
+    ///     only when the element is measurably enlarged.
+    private func audit(_ screen: String, _ types: XCUIAccessibilityAuditType = .all, isSettings: Bool = false) {
         // Let transitions (tab switch, keyboard dismissal, form re-layout) finish first: an audit
         // taken mid-animation reports different, transient issues from run to run.
         Thread.sleep(forTimeInterval: 1)
@@ -38,6 +45,23 @@ final class AccessibilityUITests: XCTestCase {
                 // design: ignore contrast issues only inside the bottom bar zone.
                 if issue.auditType == .contrast, let element = issue.element, let window = app?.windows.firstMatch,
                    element.frame.maxY > window.frame.maxY - 110 {
+                    return true
+                }
+                // The same fade applies at the top, to content scrolled up under the navigation bar.
+                if issue.auditType == .contrast, let element = issue.element,
+                   let bar = app?.navigationBars.firstMatch, bar.exists,
+                   element.frame.minY < bar.frame.maxY {
+                    return true
+                }
+                if isSettings, issue.auditType == .contrast, issue.element == nil {
+                    return true
+                }
+                if isSettings, issue.auditType == .dynamicType, let element = issue.element,
+                   element.frame.height >= 2 * 20.3 {
+                    return true
+                }
+                // WCAG 1.4.3 exempts inactive controls; iOS shows "disabled" by dimming.
+                if issue.auditType == .contrast, issue.element?.isEnabled == false {
                     return true
                 }
                 // At launch the iPadOS floating tab bar builds its four labels without Dynamic
@@ -73,7 +97,7 @@ final class AccessibilityUITests: XCTestCase {
         let characters = app.textFields["practiceCharacters"]
         characters.coordinate(withNormalizedOffset: CGVector(dx: 0.98, dy: 0.5)).tap()
         characters.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 20) + "#")
-        app.navigationBars["Practice"].staticTexts["Practice"].firstMatch.tap()  // dismiss keyboard
+        app.buttons["keyboardDone"].firstMatch.tap()
         audit("\(label) Practice warning", types)
 
         tab("Text")
@@ -81,22 +105,29 @@ final class AccessibilityUITests: XCTestCase {
         let editor = app.textViews["textInput"]
         editor.tap()
         editor.typeText("Hi #73")
-        app.navigationBars["Text"].staticTexts["Text"].firstMatch.tap()  // dismiss keyboard
+        app.buttons["keyboardDone"].firstMatch.tap()
         XCTAssertTrue(app.staticTexts["textSkipped"].waitForExistence(timeout: 3))
         audit("\(label) Text with warning", types)
 
         tab("Settings")
-        audit("\(label) Settings", types)
+        audit("\(label) Settings", types, isSettings: true)
+        app.swipeUp()
+        app.swipeUp()
+        audit("\(label) Settings bottom", types, isSettings: true)
     }
+
+    /// Dynamic Type and clipping are checked in `testLargestTextSize`, at the size where they
+    /// matter; at the default size the audit reports contradictory warnings for system labels.
+    private let defaultSizeChecks = XCUIAccessibilityAuditType.all.subtracting([.dynamicType, .textClipped])
 
     func testLightMode() throws {
         launch()
-        auditAllScreens(label: "light")
+        auditAllScreens(defaultSizeChecks, label: "light")
     }
 
     func testDarkMode() throws {
         launch(appearance: .dark)
-        auditAllScreens(label: "dark")
+        auditAllScreens(defaultSizeChecks, label: "dark")
     }
 
     func testLargestTextSize() throws {

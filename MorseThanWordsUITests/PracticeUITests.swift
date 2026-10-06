@@ -20,8 +20,7 @@ final class PracticeUITests: XCTestCase {
         let existing = (field.value as? String) ?? ""
         field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: existing.count + 5))
         field.typeText(text)
-        // Dismiss the keyboard by tapping the section footer area.
-        app.staticTexts["Characters"].firstMatch.tap()
+        app.buttons["keyboardDone"].firstMatch.tap()
     }
 
     private func setCount(_ count: Int) {

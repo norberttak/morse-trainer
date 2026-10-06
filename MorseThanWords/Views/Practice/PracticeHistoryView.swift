@@ -23,19 +23,23 @@ struct PracticeHistoryView: View {
         }
         .overlay {
             if sessions.isEmpty {
-                ContentUnavailableView(
-                    "No Sessions Yet",
-                    systemImage: "clock",
-                    description: Text("Completed practice sessions appear here.")
-                )
+                ContentUnavailableView {
+                    Label("No Sessions Yet", systemImage: "clock")
+                } description: {
+                    // The default description gray is just below 4.5:1.
+                    Text("Completed practice sessions appear here.")
+                        .foregroundStyle(.footnoteText)
+                }
             }
         }
         .navigationTitle("History")
         .toolbar {
             if !sessions.isEmpty {
                 ToolbarItem(placement: .destructiveAction) {
-                    Button("Delete All", role: .destructive) {
+                    Button(role: .destructive) {
                         isConfirmingDeleteAll = true
+                    } label: {
+                        Text("Delete All").foregroundStyle(.destructiveText)
                     }
                     .accessibilityIdentifier("deleteAllButton")
                 }

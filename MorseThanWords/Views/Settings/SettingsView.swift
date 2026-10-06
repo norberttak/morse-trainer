@@ -17,8 +17,10 @@ struct SettingsView: View {
                 conditionsSection($settings)
 
                 Section {
-                    Button("Reset to Defaults", role: .destructive) {
+                    Button(role: .destructive) {
                         isConfirmingReset = true
+                    } label: {
+                        Text("Reset to Defaults").foregroundStyle(.destructiveText)
                     }
                     .accessibilityIdentifier("resetButton")
                 }

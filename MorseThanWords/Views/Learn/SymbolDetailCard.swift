@@ -36,8 +36,10 @@ struct SymbolDetailCard: View {
                             .accessibilityAddTraits(.isStaticText)
                             .accessibilityIdentifier("selectedPattern")
                         Text(symbol.pattern)
-                            .font(.title3.monospaced().weight(.semibold))
-                            .foregroundStyle(.footnoteText)
+                            // Primary and bold: thin "." and "-" glyphs anti-alias lighter than their
+                            // color, so a gray here fails the contrast check.
+                            .font(.title3.monospaced().weight(.bold))
+                            .foregroundStyle(.primary)
                             .accessibilityHidden(true)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)

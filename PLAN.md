@@ -1,6 +1,6 @@
 # Morse Than Words — Implementation & Verification Plan
 
-Status: **P6 done** (text playback: paste/type/import, encoding detection, ticker). Requirements source: `CLAUDE.md`.
+Status: **P7 done** (icon, Dynamic Type, VoiceOver, contrast; accessibility audit clean on iPhone and iPad). Requirements source: `CLAUDE.md`.
 
 ## 0. Decisions made in the planning session
 
@@ -182,6 +182,19 @@ Each phase ends with its tests green and a short demo on simulator (iPhone 17 + 
   and the same with `name=iPad Air 11-inch (M3)` — runs MorseKit, app unit and UI tests.
 - `swift test` in `Packages/MorseKit` (fast, Mac-only, no simulator).
 - `scripts/check-privacy.sh` — fails on networking / tracking / StoreKit APIs.
+- UI and unit tests use `MorsePlayer(output: .silent)`: the real synth driven by a virtual
+  48 kHz clock, never the audio hardware. Under heavy test load the simulator's audio server
+  can stall and AudioToolbox then aborts the app (seen as `_ReportRPCTimeout` crashes).
+
+### 3.7 Accessibility audit (`AccessibilityUITests`)
+Xcode's `performAccessibilityAudit` on every screen (plus warning states), in light, dark and
+at Accessibility XXXL, on iPhone and iPad. Dynamic Type and clipping are checked at XXXL only.
+Accepted findings, each backed by a measurement documented in the test:
+- contrast of content faded by the iOS 26 scroll-edge effect under the tab bar or navigation bar;
+- contrast of disabled controls (WCAG 1.4.3 exempts inactive components);
+- Dynamic Type on unexposed `UILabel`s: the iPadOS tab bar's four labels at launch;
+- Settings only (standard switches and sliders): element-less contrast findings, and Dynamic
+  Type findings on labels whose frame shows they did scale.
 - Optional later: GitHub Actions on a macOS runner running the above.
 
 ---

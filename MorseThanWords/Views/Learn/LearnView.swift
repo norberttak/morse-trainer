@@ -64,7 +64,7 @@ private struct SymbolCell: View {
                 .minimumScaleFactor(0.6)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, minHeight: 56)
-                .foregroundStyle(isSelected ? AnyShapeStyle(.white) : AnyShapeStyle(.primary))
+                .foregroundStyle(isSelected ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.primary))
                 .background(isSelected ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(.background.secondary), in: .rect(cornerRadius: 12))
                 .contentShape(.rect(cornerRadius: 12))
         }

@@ -12,6 +12,7 @@ struct TextView: View {
     @State private var isImporting = false
     @State private var importWasShortened = false
     @State private var importError: TextImport.ImportError?
+    @FocusState private var isEditorFocused: Bool
 
     var body: some View {
         NavigationStack {
@@ -71,6 +72,7 @@ struct TextView: View {
                 }
                 .accessibilityLabel("Text to send")
                 .accessibilityIdentifier("textInput")
+                .focused($isEditorFocused)
 
             summary
 
@@ -79,6 +81,7 @@ struct TextView: View {
             } label: {
                 Label("Play", systemImage: "play.fill")
                     .font(.headline)
+                    .foregroundStyle(.onAccent)
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
@@ -113,10 +116,18 @@ struct TextView: View {
         }
         .font(.footnote)
         .foregroundStyle(.footnoteText)
+        // Always keep the full wrapped height; the expanding editor above must not squeeze it.
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     @ToolbarContentBuilder
     private var toolbar: some ToolbarContent {
+        // A multi-line editor has no Return-to-dismiss; this is the way to close the keyboard.
+        ToolbarItemGroup(placement: .keyboard) {
+            Spacer()
+            Button("Done") { isEditorFocused = false }
+                .accessibilityIdentifier("keyboardDone")
+        }
         if !controller.isActive {
             ToolbarItemGroup(placement: .primaryAction) {
                 Button("Import", systemImage: "square.and.arrow.down") {

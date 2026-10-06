@@ -17,7 +17,7 @@ struct SliderRow: View {
                 Spacer()
                 Text(format(value))
                     .monospacedDigit()
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.footnoteText)
                     .accessibilityIdentifier("\(identifier)Value")
             }
             // Rounded here rather than via `step:`, which makes iOS 26 draw a tick per step.

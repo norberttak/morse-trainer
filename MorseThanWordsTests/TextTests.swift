@@ -69,7 +69,7 @@ struct TextPlaybackTests {
     }
 
     @Test func tickerHighlightsCurrentToken() {
-        let player = MorsePlayer(isMuted: true)
+        let player = MorsePlayer(output: .silent)
         let controller = TextPlaybackController()
         let prepared = PreparedText("CQ CQ DE HA5XYZ <AR>")
         controller.play(prepared, timing: MorseTiming(characterWPM: 50), synth: SynthSettings(volume: 0), player: player)

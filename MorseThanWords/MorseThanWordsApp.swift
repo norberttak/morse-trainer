@@ -5,7 +5,7 @@ import os
 @main
 struct MorseThanWordsApp: App {
     @State private var settings = AppSettings(defaults: AppEnvironment.makeSettingsDefaults())
-    @State private var player = MorsePlayer(isMuted: AppEnvironment.isUITesting)
+    @State private var player = MorsePlayer(output: AppEnvironment.isUITesting ? .silent : .speaker)
     @Environment(\.scenePhase) private var scenePhase
     private let modelContainer = Self.makeModelContainer()
 

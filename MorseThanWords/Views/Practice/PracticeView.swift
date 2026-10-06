@@ -124,6 +124,7 @@ struct PracticeView: View {
 private struct PracticeSetupForm: View {
     @Environment(AppSettings.self) private var settings
     let start: () -> Void
+    @FocusState private var isFieldFocused: Bool
 
     private static let presets: [(LocalizedStringKey, String)] = [
         ("Koch 1–12", AppSettings.defaultPracticeCharacters),
@@ -143,6 +144,7 @@ private struct PracticeSetupForm: View {
                     .textInputAutocapitalization(.characters)
                     .autocorrectionDisabled()
                     .accessibilityIdentifier("practiceCharacters")
+                    .focused($isFieldFocused)
                 // A standard picker row: shows the matching preset, or Custom for typed sets.
                 Picker("Preset", selection: Binding(
                     get: { Self.presets.first { $0.1 == settings.practiceCharacters }?.1 },
@@ -193,6 +195,13 @@ private struct PracticeSetupForm: View {
         }
         // Prominent (primary, bold) headers: the default gray section header is just below 4.5:1.
         .headerProminence(.increased)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") { isFieldFocused = false }
+                    .accessibilityIdentifier("keyboardDone")
+            }
+        }
     }
 
     private static func durationText(_ seconds: Double) -> String {
@@ -224,8 +233,11 @@ private struct PracticeResultView: View {
                         Text("When you're ready, reveal what was sent and compare it with your notes.")
                             .multilineTextAlignment(.center)
                             .foregroundStyle(.secondary)
-                        Button("Reveal Characters", systemImage: "eye") {
+                        Button {
                             withAnimation { isRevealed = true }
+                        } label: {
+                            Label("Reveal Characters", systemImage: "eye")
+                                .foregroundStyle(.onAccent)
                         }
                         .buttonStyle(.borderedProminent)
                         .controlSize(.large)
