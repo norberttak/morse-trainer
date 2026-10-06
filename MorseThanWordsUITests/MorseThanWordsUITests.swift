@@ -18,8 +18,8 @@ final class LearnUITests: XCTestCase {
         app.buttons["symbol-L"].tap()
 
         XCTAssertEqual(app.staticTexts["selectedSymbol"].label, "L")
-        // The pattern text shows `.-..`; its accessibility label is the spoken form.
-        XCTAssertEqual(app.staticTexts["selectedPattern"].label, "dit dah dit dit")
+        // The drawn pattern carries the spoken form for VoiceOver.
+        XCTAssertEqual(app.descendants(matching: .any)["selectedPattern"].label, "dit dah dit dit")
         XCTAssertTrue(app.buttons["symbol-L"].isSelected)
     }
 
@@ -28,7 +28,7 @@ final class LearnUITests: XCTestCase {
         app.buttons["symbol-L"].tap()
         app.buttons["symbol-F"].tap()
         XCTAssertEqual(app.staticTexts["selectedSymbol"].label, "F")
-        XCTAssertEqual(app.staticTexts["selectedPattern"].label, "dit dit dah dit")
+        XCTAssertEqual(app.descendants(matching: .any)["selectedPattern"].label, "dit dit dah dit")
         XCTAssertTrue(app.buttons["replayButton"].isHittable)
         app.buttons["replayButton"].tap()
     }
@@ -45,7 +45,7 @@ final class LearnUITests: XCTestCase {
             XCTAssertTrue(button.isHittable, "\(identifier) not reachable")
         }
         app.buttons["symbol-SOS"].tap()
-        XCTAssertEqual(app.staticTexts["selectedSymbol"].label, "<SOS>")
+        XCTAssertEqual(app.staticTexts["selectedSymbol"].label, "prosign S O S")
     }
 
     func testTabsExist() throws {

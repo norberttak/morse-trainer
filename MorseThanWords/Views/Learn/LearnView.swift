@@ -69,7 +69,7 @@ private struct SymbolCell: View {
                 .contentShape(.rect(cornerRadius: 12))
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(symbol.displayText)
+        .accessibilityLabel(symbol.spokenName)
         .accessibilityHint("Plays the Morse code")
         .accessibilityAddTraits(isSelected ? .isSelected : [])
         .accessibilityIdentifier("symbol-\(symbol.text)")

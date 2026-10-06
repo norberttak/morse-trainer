@@ -87,6 +87,8 @@ struct TextView: View {
             .accessibilityIdentifier("playText")
         }
         .padding()
+        .frame(maxWidth: 700)
+        .frame(maxWidth: .infinity)
     }
 
     private var summary: some View {
@@ -230,6 +232,8 @@ private struct TextPlaybackView: View {
             Spacer()
         }
         .padding()
+        .frame(maxWidth: 700)
+        .frame(maxWidth: .infinity)
     }
 
     private func ticker(_ parts: (before: String, current: String, after: String)) -> some View {

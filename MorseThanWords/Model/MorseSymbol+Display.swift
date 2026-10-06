@@ -6,6 +6,12 @@ extension MorseSymbol {
     var spokenPattern: String {
         elements.map { $0 == .dit ? "dit" : "dah" }.joined(separator: " ")
     }
+
+    /// VoiceOver name: prosigns are spelled out ("prosign A R") instead of "<AR>".
+    var spokenName: String {
+        guard kind == .prosign else { return text }
+        return String(localized: "prosign \(text.map(String.init).joined(separator: " "))")
+    }
 }
 
 extension MorseSymbol.Kind {

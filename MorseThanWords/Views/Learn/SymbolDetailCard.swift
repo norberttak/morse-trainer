@@ -7,25 +7,38 @@ struct SymbolDetailCard: View {
     let isPlaying: Bool
     let onReplay: () -> Void
 
+    @ScaledMetric(relativeTo: .largeTitle) private var symbolSize: CGFloat = 64
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
     var body: some View {
+        // At accessibility text sizes there is no room side by side, so stack vertically.
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 16))
+            : AnyLayout(HStackLayout(spacing: 20))
         Group {
             if let symbol {
-                HStack(spacing: 20) {
+                layout {
                     Text(symbol.displayText)
-                        .font(.system(size: 64, weight: .bold, design: .rounded))
+                        .font(.system(size: symbolSize, weight: .bold, design: .rounded))
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
                         .frame(minWidth: 80)
+                        .accessibilityLabel(symbol.spokenName)
                         .accessibilityIdentifier("selectedSymbol")
 
                     VStack(alignment: .leading, spacing: 12) {
+                        // VoiceOver reads the drawn pattern ("dit dah dit dit"); the `.-..` text
+                        // below shows the same thing visually and is hidden from VoiceOver.
                         MorsePatternView(elements: symbol.elements)
                             .foregroundStyle(.tint)
+                            .accessibilityElement(children: .ignore)
+                            .accessibilityLabel(symbol.spokenPattern)
+                            .accessibilityAddTraits(.isStaticText)
+                            .accessibilityIdentifier("selectedPattern")
                         Text(symbol.pattern)
                             .font(.title3.monospaced())
                             .foregroundStyle(.secondary)
-                            .accessibilityLabel(symbol.spokenPattern)
-                            .accessibilityIdentifier("selectedPattern")
+                            .accessibilityHidden(true)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
 

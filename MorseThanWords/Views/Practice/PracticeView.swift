@@ -7,6 +7,8 @@ struct PracticeView: View {
     @Environment(MorsePlayer.self) private var player
     @Environment(\.modelContext) private var modelContext
     @State private var controller = PracticeController()
+    @ScaledMetric(relativeTo: .largeTitle) private var countdownSize: CGFloat = 96
+    @ScaledMetric(relativeTo: .largeTitle) private var progressSize: CGFloat = 56
 
     var body: some View {
         NavigationStack {
@@ -49,7 +51,7 @@ struct PracticeView: View {
             Text("Get your pencil ready")
                 .font(.title2)
             Text(verbatim: "\(remaining)")
-                .font(.system(size: 96, weight: .bold, design: .rounded))
+                .font(.system(size: countdownSize, weight: .bold, design: .rounded))
                 .contentTransition(.numericText(countsDown: true))
                 .animation(.default, value: remaining)
             Button("Cancel", role: .cancel) {
@@ -57,6 +59,7 @@ struct PracticeView: View {
             }
             .buttonStyle(.bordered)
         }
+        .frame(maxWidth: 700)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
@@ -68,7 +71,9 @@ struct PracticeView: View {
                 .font(.title2)
                 .multilineTextAlignment(.center)
             Text(verbatim: "\(played) / \(total)")
-                .font(.system(size: 56, weight: .bold, design: .rounded).monospacedDigit())
+                .font(.system(size: progressSize, weight: .bold, design: .rounded).monospacedDigit())
+                .minimumScaleFactor(0.5)
+                .lineLimit(1)
                 .accessibilityLabel("\(played) of \(total) characters")
                 .accessibilityIdentifier("practiceProgress")
             ProgressView(value: Double(played), total: Double(max(total, 1)))
@@ -90,6 +95,7 @@ struct PracticeView: View {
             .controlSize(.large)
         }
         .padding()
+        .frame(maxWidth: 700)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
@@ -227,6 +233,8 @@ private struct PracticeResultView: View {
                     .accessibilityIdentifier("newSessionButton")
             }
             .padding()
+            .frame(maxWidth: 700)
+            .frame(maxWidth: .infinity)
         }
     }
 }

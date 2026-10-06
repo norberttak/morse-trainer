@@ -60,4 +60,10 @@ struct DisplayTests {
         #expect(MorseCode.symbol(for: "L")?.spokenPattern == "dit dah dit dit")
         #expect(MorseCode.symbol(for: "0")?.spokenPattern == "dah dah dah dah dah")
     }
+
+    @Test func spokenName() {
+        #expect(MorseCode.symbol(for: "L")?.spokenName == "L")
+        #expect(MorseCode.symbol(for: "?")?.spokenName == "?")
+        #expect(MorseCode.prosign(named: "AR")?.spokenName == "prosign A R")
+    }
 }
