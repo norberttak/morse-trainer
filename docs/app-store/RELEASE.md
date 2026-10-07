@@ -34,13 +34,23 @@ App Privacy = "Data Not Collected", age rating questionnaire = all "None").
 
 ## 4. Build and upload to TestFlight
 
+One-time setup: register at least one device (connect your iPhone; the script registers paired
+devices) and create a local **Apple Distribution** certificate (Xcode › Settings › Accounts ›
+Manage Certificates › + › Apple Distribution).
+
 ```sh
-./scripts/archive.sh --upload
+./scripts/archive.sh
 ```
 
-This runs the privacy and metadata checks, archives a signed Release build and uploads it.
-After processing (~15 min) the build appears under TestFlight. Add yourself as an internal
-tester and install it with the TestFlight app on **your iPhone and your iPad**.
+This runs the privacy and metadata checks, archives, exports and re-signs the app, and writes
+`build/export/MorseThanWords.ipa`. The re-signing works around an Xcode bug: its distribution
+signing encodes the "Á" in the certificate name differently from the certificate, which App Store
+Connect rejects as an invalid signature (details in the script).
+
+Upload the .ipa with Apple's **Transporter** app (Mac App Store): sign in with your Apple ID, drag
+the file in, click **Deliver**. After processing (~15–30 min) the build appears under TestFlight.
+Add yourself as an internal tester and install it with the TestFlight app on **your iPhone and
+your iPad**.
 
 ## 5. Check on real devices (P8 exit criterion)
 
