@@ -73,6 +73,7 @@ struct TextView: View {
                 .accessibilityLabel("Text to send")
                 .accessibilityIdentifier("textInput")
                 .focused($isEditorFocused)
+                .scrollDismissesKeyboard(.interactively)
 
             summary
 
@@ -122,13 +123,15 @@ struct TextView: View {
 
     @ToolbarContentBuilder
     private var toolbar: some ToolbarContent {
-        // A multi-line editor has no Return-to-dismiss; this is the way to close the keyboard.
-        ToolbarItemGroup(placement: .keyboard) {
-            Spacer()
-            Button("Done") { isEditorFocused = false }
-                .accessibilityIdentifier("keyboardDone")
-        }
-        if !controller.isActive {
+        // A multi-line editor has no Return-to-dismiss. The Done button lives in the navigation bar
+        // while editing (as in Notes): a keyboard-accessory toolbar did not show on device when
+        // several tabs of the TabView declared one.
+        if isEditorFocused {
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Done") { isEditorFocused = false }
+                    .accessibilityIdentifier("keyboardDone")
+            }
+        } else if !controller.isActive {
             ToolbarItemGroup(placement: .primaryAction) {
                 Button("Import", systemImage: "square.and.arrow.down") {
                     isImporting = true

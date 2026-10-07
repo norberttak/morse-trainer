@@ -61,6 +61,18 @@ final class TextUITests: XCTestCase {
         XCTAssertTrue(app.textViews["textInput"].waitForExistence(timeout: 3))
     }
 
+    func testDoneButtonClosesKeyboard() throws {
+        launch()
+        type("CQ")
+        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 3))
+        let done = app.navigationBars["Text"].buttons["keyboardDone"]
+        XCTAssertTrue(done.waitForExistence(timeout: 3), "Done must be in the navigation bar while editing")
+        done.tap()
+        XCTAssertTrue(app.keyboards.firstMatch.waitForNonExistence(timeout: 3))
+        XCTAssertFalse(done.exists)
+        XCTAssertTrue(app.buttons["importButton"].exists)
+    }
+
     func testReportsSkippedCharacters() throws {
         launch()
         type("Hi #1 €")

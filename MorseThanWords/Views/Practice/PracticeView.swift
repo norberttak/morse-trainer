@@ -139,10 +139,23 @@ private struct PracticeSetupForm: View {
         let characters = PracticeGenerator.characterSet(from: settings.practiceCharacters)
         Form {
             Section {
-                TextField("Characters to practice", text: $settings.practiceCharacters, axis: .vertical)
+                // Multi-line so long sets wrap at large text sizes. Return ("Done") closes the keyboard:
+                // a line break means nothing in a character set, so it is dropped instead of inserted.
+                TextField("Characters to practice", text: Binding(
+                    get: { settings.practiceCharacters },
+                    set: { newValue in
+                        if newValue.contains("\n") {
+                            settings.practiceCharacters = newValue.replacingOccurrences(of: "\n", with: "")
+                            isFieldFocused = false
+                        } else {
+                            settings.practiceCharacters = newValue
+                        }
+                    }
+                ), axis: .vertical)
                     .font(.title3.monospaced())
                     .textInputAutocapitalization(.characters)
                     .autocorrectionDisabled()
+                    .submitLabel(.done)
                     .accessibilityIdentifier("practiceCharacters")
                     .focused($isFieldFocused)
                 // A standard picker row: shows the matching preset, or Custom for typed sets.
@@ -196,10 +209,13 @@ private struct PracticeSetupForm: View {
         // Prominent (primary, bold) headers: the default gray section header is just below 4.5:1.
         .headerProminence(.increased)
         .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button("Done") { isFieldFocused = false }
-                    .accessibilityIdentifier("keyboardDone")
+            // In the navigation bar rather than above the keyboard: a keyboard-accessory toolbar
+            // did not show on device when several tabs of the TabView declared one.
+            if isFieldFocused {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { isFieldFocused = false }
+                        .accessibilityIdentifier("keyboardDone")
+                }
             }
         }
     }

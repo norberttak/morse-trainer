@@ -93,6 +93,23 @@ final class PracticeUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["No Sessions Yet"].waitForExistence(timeout: 2))
     }
 
+    func testKeyboardClosesWithDoneAndReturn() throws {
+        launch()
+        let field = app.textFields["practiceCharacters"]
+        field.tap()
+        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 3))
+        let done = app.navigationBars["Practice"].buttons["keyboardDone"]
+        XCTAssertTrue(done.waitForExistence(timeout: 3), "Done must be in the navigation bar while editing")
+        done.tap()
+        XCTAssertTrue(app.keyboards.firstMatch.waitForNonExistence(timeout: 3))
+
+        field.tap()
+        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 3))
+        field.typeText("\n")  // Return key ("Done")
+        XCTAssertTrue(app.keyboards.firstMatch.waitForNonExistence(timeout: 3))
+        XCTAssertEqual(field.value as? String, "KMURESNAPTLW", "Return must not add a line break")
+    }
+
     func testEmptyCharacterSetDisablesStart() throws {
         launch()
         setCharacters("#!")
